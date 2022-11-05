@@ -8,8 +8,6 @@ services:
       - 8000
     container_name: api
     restart: always
-    networks:
-      - web-app
 
   frontend:
     build:
@@ -19,7 +17,17 @@ services:
       - 3000:3000
     container_name: frontend
     restart: always
-    networks:
-      - web-app
-networks:
-  web-app:
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      # - react_build:/var/www/react
+    depends_on:
+      - api
+      - frontend
+    
+# volumes:
+#   react_build:

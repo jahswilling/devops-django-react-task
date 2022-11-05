@@ -1,0 +1,15 @@
+FROM  python:3.8
+
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /api
+
+# copy from the current directory of the Dockerfile to /api in the image
+COPY . . 
+
+RUN pip install -r requirements.txt
+
+CMD ["python", "manage.py", "runserver"]
+
+EXPOSE 8000
+

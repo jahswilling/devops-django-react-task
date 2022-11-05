@@ -1,0 +1,25 @@
+
+services:
+  api:
+    build:
+      context: api
+    image: docker.io/root0877/hng-devops-django
+    expose:
+      - 8000
+    container_name: api
+    restart: always
+    networks:
+      - web-app
+
+  frontend:
+    build:
+      context: frontend
+    image: docker.io/root0877/hng-devops-react
+    ports:
+      - 3000:3000
+    container_name: frontend
+    restart: always
+    networks:
+      - web-app
+networks:
+  web-app:
